@@ -1,29 +1,29 @@
 `timescale 1ns/1ps
 
-module tb_counter_100 (
-    input tb_clk,
-    input tb_reset_n,
-    output [6:0] tb_o_cnt,
-    output [6:0] tb_o_cnt_always
-);
-
+module tb_counter_100;
 reg tb_clk, tb_reset_n;
+wire [6:0] o_cnt;
+wire [6:0] o_cnt_always;
+
+always
+    #5 clk = ~clk;
+
 initial begin
     #100
     $display("initialize at [%d]", $time);
     tb_reset_n <= 1;
-    #10
+    tb_clk     <= 0;
+
+    $display("reset at [%d]", $time);
+    #100
     tb_reset_n <= 0;    
     #10
-    $display("start at [%d]", $time);
     tb_reset_n <= 1;
+    #10
+    $display("start at [%d]", $time);
     #2000
     $display("finish at [%d]", $time);
     $finish
-end
-
-always begin
-    #5 clk = ~clk;
 end
 
 counter_100 u_counter_100 (
