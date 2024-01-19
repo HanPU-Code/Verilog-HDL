@@ -1,5 +1,6 @@
 `timescale 1ns / 1ps
 
+// 2 (2) DUT 코딩
 module count_100 (
     input clk,
     input reset_n,
