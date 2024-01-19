@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module count_100 (
+module counter_100 (
     input clk,
     input reset_n,
     output [6:0] o_cnt,
