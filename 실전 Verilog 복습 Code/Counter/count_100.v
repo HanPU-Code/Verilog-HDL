@@ -1,26 +1,26 @@
-// 3회차 코드 작성
+// 3회차 답안 작성
 `timescale 1ns / 1ps
 
 module counter_100 (
-    input i_clk,
-    input i_reset_n,
-    output [6:0] o_value,
-    output [6:0] o_value_always
+    input clk,
+    input reset_n,
+    output [6:0] o_cnt,
+    output [6:0] o_cnt_always
 );
 
-reg cnt;
-always @(posedge i_clk or negedge i_reset_n) begin
-    if (!i_reset_n) begin
+reg [6:0] cnt;
+always @(posedge clk or negedge reset_n) begin
+    if (!reset_n) begin
         cnt <= 0;
     end else if (cnt < 100) begin
         cnt <= cnt + 1;
     end
 end
-assign cnt = o_value;
+assign o_cnt = cnt;
 
-reg cnt_always;
-always @(posedge i_clk or negedge i_reset_n) begin
-    if (!i_reset_n) begin
+reg [6:0] cnt_always;
+always @(posedge clk or negedge reset_n) begin
+    if (!reset_n) begin
         cnt_always <= 0;
     end else if (cnt_always == 100 - 1) begin
         cnt_always <= 0;
@@ -28,6 +28,6 @@ always @(posedge i_clk or negedge i_reset_n) begin
         cnt_always <= cnt_always + 1;
     end
 end
-assign cnt_always = o_value_always;
+assign o_cnt_always = cnt_always;
     
 endmodule
